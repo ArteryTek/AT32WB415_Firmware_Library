@@ -1,0 +1,15 @@
+/**
+  **************************************************************************
+  * @file     readme.txt
+  * @version  v2.0.0
+  * @date     2022-04-02
+  * @brief    readme
+  **************************************************************************
+  */
+
+  this demo is based on the at-start board, in this demo, shows how to
+  monitoring adc channel's voltage.
+  the convert data as follow:
+  - adc1_ordinary_valuetab[0] ---> adc1_channel_0
+  - adc1_ordinary_valuetab[1] ---> adc1_channel_1
+  the voltage monitoring channel is: adc1_channel_1
