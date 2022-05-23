@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32wb415_wdt.c
-  * @version  v2.0.0
-  * @date     2022-04-02
+  * @version  v2.0.1
+  * @date     2022-05-20
   * @brief    contains all the functions for the wdt firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer

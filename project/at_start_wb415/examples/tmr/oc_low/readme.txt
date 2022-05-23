@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.0
-  * @date     2022-04-02
+  * @version  v2.0.1
+  * @date     2022-05-20
   * @brief    readme
   **************************************************************************
   */
@@ -26,3 +26,5 @@
   - pb7
   - pb8
   - pb9
+
+  for more detailed information. please refer to the application note document AN0085.

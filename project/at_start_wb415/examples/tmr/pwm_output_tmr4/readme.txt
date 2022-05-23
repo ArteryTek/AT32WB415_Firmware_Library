@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.0
-  * @date     2022-04-02
+  * @version  v2.0.1
+  * @date     2022-05-20
   * @brief    readme
   **************************************************************************
   */
@@ -13,3 +13,5 @@
   tmr4 channel2 duty cycle = (tmr4_c2dt/ tmr4_pr)* 100 = 37.5%
   tmr4 channel3 duty cycle = (tmr4_c3dt/ tmr4_pr)* 100 = 25%
   tmr4 channel4 duty cycle = (tmr4_c4dt/ tmr4_pr)* 100 = 12.5%
+
+  for more detailed information. please refer to the application note document AN0085.

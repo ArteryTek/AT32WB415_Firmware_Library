@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.0
-  * @date     2022-04-02
+  * @version  v2.0.1
+  * @date     2022-05-20
   * @brief    readme
   **************************************************************************
   */
@@ -41,3 +41,5 @@
   - tmr1_ch1c pin (pb.13)
   - tmr1_ch2c pin (pb.14)
   - tmr1_ch3c pin (pb.15)
+
+  for more detailed information. please refer to the application note document AN0085.

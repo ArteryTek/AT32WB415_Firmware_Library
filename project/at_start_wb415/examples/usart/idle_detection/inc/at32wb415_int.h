@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32wb415_int.h
-  * @version  v2.0.0
-  * @date     2022-04-02
+  * @version  v2.0.1
+  * @date     2022-05-20
   * @brief    header file of main interrupt service routines.
   **************************************************************************
   *                       Copyright notice & Disclaimer
