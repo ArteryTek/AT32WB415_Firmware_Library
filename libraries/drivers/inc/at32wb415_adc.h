@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32wb415_adc.h
-  * @version  v2.0.1
-  * @date     2022-05-20
+  * @version  v2.0.2
+  * @date     2022-06-28
   * @brief    at32wb415 adc header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -97,16 +97,8 @@ typedef enum
   ADC_CHANNEL_3                          = 0x03, /*!< adc channel 3 */
   ADC_CHANNEL_4                          = 0x04, /*!< adc channel 4 */
   ADC_CHANNEL_5                          = 0x05, /*!< adc channel 5 */
-  ADC_CHANNEL_6                          = 0x06, /*!< adc channel 6 */
-  ADC_CHANNEL_7                          = 0x07, /*!< adc channel 7 */
-  ADC_CHANNEL_8                          = 0x08, /*!< adc channel 8 */
-  ADC_CHANNEL_9                          = 0x09, /*!< adc channel 9 */
   ADC_CHANNEL_10                         = 0x0A, /*!< adc channel 10 */
   ADC_CHANNEL_11                         = 0x0B, /*!< adc channel 11 */
-  ADC_CHANNEL_12                         = 0x0C, /*!< adc channel 12 */
-  ADC_CHANNEL_13                         = 0x0D, /*!< adc channel 13 */
-  ADC_CHANNEL_14                         = 0x0E, /*!< adc channel 14 */
-  ADC_CHANNEL_15                         = 0x0F, /*!< adc channel 15 */
   ADC_CHANNEL_16                         = 0x10, /*!< adc channel 16 */
   ADC_CHANNEL_17                         = 0x11  /*!< adc channel 17 */
 } adc_channel_select_type;
@@ -136,7 +128,6 @@ typedef enum
   ADC12_ORDINARY_TRIG_TMR1CH2            = 0x01, /*!< timer1 ch2 event as trigger source of adc1 ordinary sequence */
   ADC12_ORDINARY_TRIG_TMR1CH3            = 0x02, /*!< timer1 ch3 event as trigger source of adc1 ordinary sequence */
   ADC12_ORDINARY_TRIG_TMR2CH2            = 0x03, /*!< timer2 ch2 event as trigger source of adc1 ordinary sequence */
-  ADC12_ORDINARY_TRIG_TMR3TRGOUT         = 0x04, /*!< timer3 trgout event as trigger source of adc1 ordinary sequence */
   ADC12_ORDINARY_TRIG_TMR4CH4            = 0x05, /*!< timer4 ch4 event as trigger source of adc1 ordinary sequence */
   ADC12_ORDINARY_TRIG_EXINT11_TMR1TRGOUT = 0x06, /*!< exint line11/timer1 trgout event as trigger source of adc1 ordinary sequence */
   ADC12_ORDINARY_TRIG_SOFTWARE           = 0x07, /*!< software(OCSWTRG) control bit as trigger source of adc1 ordinary sequence */
@@ -153,7 +144,6 @@ typedef enum
   ADC12_PREEMPT_TRIG_TMR1CH4             = 0x01, /*!< timer1 ch4 event as trigger source of adc1 preempt sequence */
   ADC12_PREEMPT_TRIG_TMR2TRGOUT          = 0x02, /*!< timer2 trgout event as trigger source of adc1 preempt sequence */
   ADC12_PREEMPT_TRIG_TMR2CH1             = 0x03, /*!< timer2 ch1 event as trigger source of adc1 preempt sequence */
-  ADC12_PREEMPT_TRIG_TMR3CH4             = 0x04, /*!< timer3 ch4 event as trigger source of adc1 preempt sequence */
   ADC12_PREEMPT_TRIG_TMR4TRGOUT          = 0x05, /*!< timer4 trgout event as trigger source of adc1 preempt sequence */
   ADC12_PREEMPT_TRIG_EXINT15_TMR1CH4     = 0x06, /*!< exint line15/timer1 ch4 event as trigger source of adc1 preempt sequence */
   ADC12_PREEMPT_TRIG_SOFTWARE            = 0x07, /*!< software(PCSWTRG) control bit as trigger source of adc1 preempt sequence */

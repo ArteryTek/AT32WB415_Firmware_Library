@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32wb415_adc.c
-  * @version  v2.0.1
-  * @date     2022-05-20
+  * @version  v2.0.2
+  * @date     2022-06-28
   * @brief    contains all the functions for the adc firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -275,9 +275,7 @@ void adc_voltage_monitor_threshold_value_set(adc_type *adc_x, uint16_t adc_high_
   * @param  adc_channel: select the channel.
   *         this parameter can be one of the following values:
   *         - ADC_CHANNEL_0    - ADC_CHANNEL_1    - ADC_CHANNEL_2    - ADC_CHANNEL_3
-  *         - ADC_CHANNEL_4    - ADC_CHANNEL_5    - ADC_CHANNEL_6    - ADC_CHANNEL_7
-  *         - ADC_CHANNEL_8    - ADC_CHANNEL_9    - ADC_CHANNEL_10   - ADC_CHANNEL_11
-  *         - ADC_CHANNEL_12   - ADC_CHANNEL_13   - ADC_CHANNEL_14   - ADC_CHANNEL_15
+  *         - ADC_CHANNEL_4    - ADC_CHANNEL_5    - ADC_CHANNEL_10   - ADC_CHANNEL_11
   *         - ADC_CHANNEL_16   - ADC_CHANNEL_17
   * @retval none
   */
@@ -294,9 +292,7 @@ void adc_voltage_monitor_single_channel_select(adc_type *adc_x, adc_channel_sele
   * @param  adc_channel: select the channel.
   *         this parameter can be one of the following values:
   *         - ADC_CHANNEL_0    - ADC_CHANNEL_1    - ADC_CHANNEL_2    - ADC_CHANNEL_3
-  *         - ADC_CHANNEL_4    - ADC_CHANNEL_5    - ADC_CHANNEL_6    - ADC_CHANNEL_7
-  *         - ADC_CHANNEL_8    - ADC_CHANNEL_9    - ADC_CHANNEL_10   - ADC_CHANNEL_11
-  *         - ADC_CHANNEL_12   - ADC_CHANNEL_13   - ADC_CHANNEL_14   - ADC_CHANNEL_15
+  *         - ADC_CHANNEL_4    - ADC_CHANNEL_5    - ADC_CHANNEL_10   - ADC_CHANNEL_11
   *         - ADC_CHANNEL_16   - ADC_CHANNEL_17
   * @param  adc_sequence: set rank in the ordinary group sequencer.
   *         this parameter must be:
@@ -335,35 +331,12 @@ void adc_ordinary_channel_set(adc_type *adc_x, adc_channel_select_type adc_chann
     case ADC_CHANNEL_5:
       adc_x->spt2_bit.cspt5 = adc_sampletime;
       break;
-    case ADC_CHANNEL_6:
-      adc_x->spt2_bit.cspt6 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_7:
-      adc_x->spt2_bit.cspt7 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_8:
-      adc_x->spt2_bit.cspt8 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_9:
-      adc_x->spt2_bit.cspt9 = adc_sampletime;
-      break;
+
     case ADC_CHANNEL_10:
       adc_x->spt1_bit.cspt10 = adc_sampletime;
       break;
     case ADC_CHANNEL_11:
       adc_x->spt1_bit.cspt11 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_12:
-      adc_x->spt1_bit.cspt12 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_13:
-      adc_x->spt1_bit.cspt13 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_14:
-      adc_x->spt1_bit.cspt14 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_15:
-      adc_x->spt1_bit.cspt15 = adc_sampletime;
       break;
     case ADC_CHANNEL_16:
       adc_x->spt1_bit.cspt16 = adc_sampletime;
@@ -452,9 +425,7 @@ void adc_preempt_channel_length_set(adc_type *adc_x, uint8_t adc_channel_lenght)
   * @param  adc_channel: select the channel.
   *         this parameter can be one of the following values:
   *         - ADC_CHANNEL_0    - ADC_CHANNEL_1    - ADC_CHANNEL_2    - ADC_CHANNEL_3
-  *         - ADC_CHANNEL_4    - ADC_CHANNEL_5    - ADC_CHANNEL_6    - ADC_CHANNEL_7
-  *         - ADC_CHANNEL_8    - ADC_CHANNEL_9    - ADC_CHANNEL_10   - ADC_CHANNEL_11
-  *         - ADC_CHANNEL_12   - ADC_CHANNEL_13   - ADC_CHANNEL_14   - ADC_CHANNEL_15
+  *         - ADC_CHANNEL_4    - ADC_CHANNEL_5    - ADC_CHANNEL_10   - ADC_CHANNEL_11
   *         - ADC_CHANNEL_16   - ADC_CHANNEL_17
   * @param  adc_sequence: set rank in the preempt group sequencer.
   *         this parameter must be:
@@ -494,35 +465,11 @@ void adc_preempt_channel_set(adc_type *adc_x, adc_channel_select_type adc_channe
     case ADC_CHANNEL_5:
       adc_x->spt2_bit.cspt5 = adc_sampletime;
       break;
-    case ADC_CHANNEL_6:
-      adc_x->spt2_bit.cspt6 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_7:
-      adc_x->spt2_bit.cspt7 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_8:
-      adc_x->spt2_bit.cspt8 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_9:
-      adc_x->spt2_bit.cspt9 = adc_sampletime;
-      break;
     case ADC_CHANNEL_10:
       adc_x->spt1_bit.cspt10 = adc_sampletime;
       break;
     case ADC_CHANNEL_11:
       adc_x->spt1_bit.cspt11 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_12:
-      adc_x->spt1_bit.cspt12 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_13:
-      adc_x->spt1_bit.cspt13 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_14:
-      adc_x->spt1_bit.cspt14 = adc_sampletime;
-      break;
-    case ADC_CHANNEL_15:
-      adc_x->spt1_bit.cspt15 = adc_sampletime;
       break;
     case ADC_CHANNEL_16:
       adc_x->spt1_bit.cspt16 = adc_sampletime;
@@ -562,9 +509,8 @@ void adc_preempt_channel_set(adc_type *adc_x, adc_channel_select_type adc_channe
   * @param  adc_ordinary_trig: select the external trigger event.
   *         this parameter can be one of the following values:
   *         adc1
-  *         - ADC12_ORDINARY_TRIG_TMR1CH1     - ADC12_ORDINARY_TRIG_TMR1CH2  - ADC12_ORDINARY_TRIG_TMR1CH3             - ADC12_ORDINARY_TRIG_TMR2CH2
-  *         - ADC12_ORDINARY_TRIG_TMR3TRGOUT  - ADC12_ORDINARY_TRIG_TMR4CH4  - ADC12_ORDINARY_TRIG_EXINT11_TMR1TRGOUT  - ADC12_ORDINARY_TRIG_SOFTWARE
-  *         - ADC12_ORDINARY_TRIG_TMR1TRGOUT
+  *         - ADC12_ORDINARY_TRIG_TMR1CH1  - ADC12_ORDINARY_TRIG_TMR1CH2             - ADC12_ORDINARY_TRIG_TMR1CH3     - ADC12_ORDINARY_TRIG_TMR2CH2
+  *         - ADC12_ORDINARY_TRIG_TMR4CH4  - ADC12_ORDINARY_TRIG_EXINT11_TMR1TRGOUT  - ADC12_ORDINARY_TRIG_SOFTWARE    - ADC12_ORDINARY_TRIG_TMR1TRGOUT
   * @param  new_state: new state of ordinary channel's external trigger.
   *         this parameter can be: TRUE or FALSE.
   * @retval none
@@ -593,9 +539,8 @@ void adc_ordinary_conversion_trigger_set(adc_type *adc_x, adc_ordinary_trig_sele
   * @param  adc_preempt_trig: select the external trigger event.
   *         this parameter can be one of the following values:
   *         adc1
-  *         - ADC12_PREEMPT_TRIG_TMR1TRGOUT  - ADC12_PREEMPT_TRIG_TMR1CH4     - ADC12_PREEMPT_TRIG_TMR2TRGOUT      - ADC12_PREEMPT_TRIG_TMR2CH1
-  *         - ADC12_PREEMPT_TRIG_TMR3CH4     - ADC12_PREEMPT_TRIG_TMR4TRGOUT  - ADC12_PREEMPT_TRIG_EXINT15_TMR1CH4 - ADC12_PREEMPT_TRIG_SOFTWARE
-  *         - ADC12_PREEMPT_TRIG_TMR1CH1
+  *         - ADC12_PREEMPT_TRIG_TMR1TRGOUT  - ADC12_PREEMPT_TRIG_TMR1CH4         - ADC12_PREEMPT_TRIG_TMR2TRGOUT    - ADC12_PREEMPT_TRIG_TMR2CH1
+  *         - ADC12_PREEMPT_TRIG_TMR4TRGOUT  - ADC12_PREEMPT_TRIG_EXINT15_TMR1CH4 - ADC12_PREEMPT_TRIG_SOFTWARE      - ADC12_PREEMPT_TRIG_TMR1CH1
   * @param  new_state: new state of preempt channel's external trigger.
   *         this parameter can be: TRUE or FALSE.
   * @retval none

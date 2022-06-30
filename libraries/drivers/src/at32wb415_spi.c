@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32wb415_spi.c
-  * @version  v2.0.1
-  * @date     2022-05-20
+  * @version  v2.0.2
+  * @date     2022-06-28
   * @brief    contains all the functions for the spi firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -284,163 +284,6 @@ void spi_enable(spi_type* spi_x, confirm_state new_state)
   spi_x->ctrl1_bit.spien = new_state;
 }
 
-/**
-  * @brief  i2s init config with its default value.
-  * @param  i2s_init_struct : pointer to a i2s_init_type structure which will
-  *         be initialized.
-  * @retval none
-  */
-void i2s_default_para_init(i2s_init_type* i2s_init_struct)
-{
-  i2s_init_struct->operation_mode = I2S_MODE_SLAVE_TX;
-  i2s_init_struct->audio_protocol = I2S_AUDIO_PROTOCOL_PHILLIPS;
-  i2s_init_struct->audio_sampling_freq = I2S_AUDIO_FREQUENCY_DEFAULT;
-  i2s_init_struct->data_channel_format = I2S_DATA_16BIT_CHANNEL_16BIT;
-  i2s_init_struct->clock_polarity = I2S_CLOCK_POLARITY_LOW;
-  i2s_init_struct->mclk_output_enable = FALSE;
-}
-
-/**
-  * @brief  i2s init config with its setting value.
-  * @param  spi_x: select the spi peripheral.
-  *         this parameter can be one of the following values:
-  *         SPI2
-  * @param  i2s_init_struct : pointer to a i2s_init_type structure which will be initialized.
-  * @retval none
-  */
-void i2s_init(spi_type* spi_x, i2s_init_type* i2s_init_struct)
-{
-  crm_clocks_freq_type clocks_freq;
-  uint32_t i2s_sclk_index = 0;
-  uint32_t i2sdiv_index = 2, i2sodd_index = 0, frequency_index = 0;
-
-  /* i2s audio frequency config */
-  if(i2s_init_struct->audio_sampling_freq == I2S_AUDIO_FREQUENCY_DEFAULT)
-  {
-    i2sodd_index = 0;
-    i2sdiv_index = 2;
-  }
-  else
-  {
-    crm_clocks_freq_get(&clocks_freq);
-    i2s_sclk_index = clocks_freq.sclk_freq;
-    if((i2s_init_struct->audio_protocol == I2S_AUDIO_PROTOCOL_PCM_SHORT) || (i2s_init_struct->audio_protocol == I2S_AUDIO_PROTOCOL_PCM_LONG))
-    {
-      if(i2s_init_struct->mclk_output_enable == TRUE)
-      {
-        frequency_index = (((i2s_sclk_index / 128) * 10) / i2s_init_struct->audio_sampling_freq) + 5;
-      }
-      else
-      {
-        if(i2s_init_struct->data_channel_format == I2S_DATA_16BIT_CHANNEL_16BIT)
-          frequency_index = (((i2s_sclk_index / 16) * 10) / i2s_init_struct->audio_sampling_freq) + 5;
-        else
-          frequency_index = (((i2s_sclk_index / 32) * 10) / i2s_init_struct->audio_sampling_freq) + 5;
-      }
-    }
-    else
-    {
-      if(i2s_init_struct->mclk_output_enable == TRUE)
-      {
-        frequency_index = (((i2s_sclk_index / 256) * 10) / i2s_init_struct->audio_sampling_freq) + 5;
-      }
-      else
-      {
-        if(i2s_init_struct->data_channel_format == I2S_DATA_16BIT_CHANNEL_16BIT)
-          frequency_index = (((i2s_sclk_index / 32) * 10) / i2s_init_struct->audio_sampling_freq) + 5;
-        else
-          frequency_index = (((i2s_sclk_index / 64) * 10) / i2s_init_struct->audio_sampling_freq) + 5;
-      }
-    }
-  }
-  frequency_index = frequency_index / 10;
-  i2sodd_index = frequency_index & (uint16_t)0x0001;
-  i2sdiv_index = (frequency_index - i2sodd_index) / 2;
-  if((i2sdiv_index < 2) || (i2sdiv_index > 0x03FF))
-  {
-    i2sodd_index = 0;
-    i2sdiv_index = 2;
-  }
-  spi_x->i2sclk_bit.i2sodd = i2sodd_index;
-  if(i2sdiv_index > 0x00FF)
-  {
-    spi_x->i2sclk_bit.i2sdiv_h = (i2sdiv_index >> 8) & 0x0003;
-    spi_x->i2sclk_bit.i2sdiv_l = i2sdiv_index & 0x00FF;
-  }
-  else
-  {
-    spi_x->i2sclk_bit.i2sdiv_h = 0;
-    spi_x->i2sclk_bit.i2sdiv_l = i2sdiv_index;
-  }
-
-  /* i2s audio_protocol set*/
-  if(i2s_init_struct->audio_protocol == I2S_AUDIO_PROTOCOL_PCM_LONG)
-  {
-    spi_x->i2sctrl_bit.pcmfssel = 1;
-    spi_x->i2sctrl_bit.stdsel = 3;
-  }
-  else if(i2s_init_struct->audio_protocol == I2S_AUDIO_PROTOCOL_PCM_SHORT)
-  {
-    spi_x->i2sctrl_bit.pcmfssel = 0;
-    spi_x->i2sctrl_bit.stdsel = 3;
-  }
-  else if(i2s_init_struct->audio_protocol == I2S_AUDIO_PROTOCOL_LSB)
-  {
-    spi_x->i2sctrl_bit.pcmfssel = 0;
-    spi_x->i2sctrl_bit.stdsel = 2;
-  }
-  else if(i2s_init_struct->audio_protocol == I2S_AUDIO_PROTOCOL_MSB)
-  {
-    spi_x->i2sctrl_bit.pcmfssel = 0;
-    spi_x->i2sctrl_bit.stdsel = 1;
-  }
-  else if(i2s_init_struct->audio_protocol == I2S_AUDIO_PROTOCOL_PHILLIPS)
-  {
-    spi_x->i2sctrl_bit.pcmfssel = 0;
-    spi_x->i2sctrl_bit.stdsel = 0;
-  }
-
-  /* i2s data_channel_format set*/
-  if(i2s_init_struct->data_channel_format == I2S_DATA_16BIT_CHANNEL_16BIT)
-  {
-    spi_x->i2sctrl_bit.i2scbn = 0;
-    spi_x->i2sctrl_bit.i2sdbn = 0;
-  }
-  else if(i2s_init_struct->data_channel_format == I2S_DATA_16BIT_CHANNEL_32BIT)
-  {
-    spi_x->i2sctrl_bit.i2scbn = 1;
-    spi_x->i2sctrl_bit.i2sdbn = 0;
-  }
-  else if(i2s_init_struct->data_channel_format == I2S_DATA_24BIT_CHANNEL_32BIT)
-  {
-    spi_x->i2sctrl_bit.i2scbn = 1;
-    spi_x->i2sctrl_bit.i2sdbn = 1;
-  }
-  else if(i2s_init_struct->data_channel_format == I2S_DATA_32BIT_CHANNEL_32BIT)
-  {
-    spi_x->i2sctrl_bit.i2scbn = 1;
-    spi_x->i2sctrl_bit.i2sdbn = 2;
-  }
-
-  spi_x->i2sctrl_bit.i2sclkpol = i2s_init_struct->clock_polarity;
-  spi_x->i2sclk_bit.i2smclkoe = i2s_init_struct->mclk_output_enable;
-  spi_x->i2sctrl_bit.opersel = i2s_init_struct->operation_mode;
-  spi_x->i2sctrl_bit.i2smsel = TRUE;
-}
-
-/**
-  * @brief  enable or disable i2s.
-  * @param  spi_x: select the i2s peripheral.
-  *         this parameter can be one of the following values:
-  *         SPI2
-  * @param  new_state: new state of i2s.
-  *         this parameter can be: TRUE or FALSE.
-  * @retval none
-  */
-void i2s_enable(spi_type* spi_x, confirm_state new_state)
-{
-  spi_x->i2sctrl_bit.i2sen = new_state;
-}
 
 /**
   * @brief  enable or disable the specified spi/i2s interrupts.
@@ -532,8 +375,6 @@ uint16_t spi_i2s_data_receive(spi_type* spi_x)
   *         this parameter can be one of the following values:
   *         - SPI_I2S_RDBF_FLAG
   *         - SPI_I2S_TDBE_FLAG
-  *         - I2S_ACS_FLAG    (this flag only use in i2s mode)
-  *         - I2S_TUERR_FLAG  (this flag only use in i2s mode)
   *         - SPI_CCERR_FLAG  (this flag only use in spi mode)
   *         - SPI_MMERR_FLAG  (this flag only use in spi mode)
   *         - SPI_I2S_ROERR_FLAG
@@ -563,7 +404,6 @@ flag_status spi_i2s_flag_get(spi_type* spi_x, uint32_t spi_i2s_flag)
   *         this parameter can be one of the following values:
   *         - SPI_CCERR_FLAG
   *         - SPI_I2S_RDBF_FLAG
-  *         - I2S_TUERR_FLAG
   *         - SPI_MMERR_FLAG
   *         - SPI_I2S_ROERR_FLAG
   * @note
@@ -574,23 +414,19 @@ flag_status spi_i2s_flag_get(spi_type* spi_x, uint32_t spi_i2s_flag)
   */
 void spi_i2s_flag_clear(spi_type* spi_x, uint32_t spi_i2s_flag)
 {
-  volatile uint32_t temp = 0;
-  temp = temp;
   if(spi_i2s_flag == SPI_CCERR_FLAG)
     spi_x->sts = ~SPI_CCERR_FLAG;
   else if(spi_i2s_flag == SPI_I2S_RDBF_FLAG)
-    temp = REG32(&spi_x->dt);
-  else if(spi_i2s_flag == I2S_TUERR_FLAG)
-    temp = REG32(&spi_x->sts);
+    UNUSED(spi_x->dt);
   else if(spi_i2s_flag == SPI_MMERR_FLAG)
   {
-    temp = REG32(&spi_x->sts);
+    UNUSED(spi_x->sts);
     spi_x->ctrl1 = spi_x->ctrl1;
   }
   else if(spi_i2s_flag == SPI_I2S_ROERR_FLAG)
   {
-    temp = REG32(&spi_x->dt);
-    temp = REG32(&spi_x->sts);
+    UNUSED(spi_x->dt);
+    UNUSED(spi_x->sts);
   }
 }
 

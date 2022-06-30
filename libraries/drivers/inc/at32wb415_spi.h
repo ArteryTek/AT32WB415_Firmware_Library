@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32wb415_spi.h
-  * @version  v2.0.1
-  * @date     2022-05-20
+  * @version  v2.0.2
+  * @date     2022-06-28
   * @brief    at32wb415 spi header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -52,8 +52,6 @@ extern "C" {
 
 #define SPI_I2S_RDBF_FLAG                0x0001 /*!< spi or i2s receive data buffer full flag */
 #define SPI_I2S_TDBE_FLAG                0x0002 /*!< spi or i2s transmit data buffer empty flag */
-#define I2S_ACS_FLAG                     0x0004 /*!< i2s audio channel state flag */
-#define I2S_TUERR_FLAG                   0x0008 /*!< i2s transmitter underload error flag */
 #define SPI_CCERR_FLAG                   0x0010 /*!< spi crc calculation error flag */
 #define SPI_MMERR_FLAG                   0x0020 /*!< spi master mode error flag */
 #define SPI_I2S_ROERR_FLAG               0x0040 /*!< spi or i2s receiver overflow error flag */
@@ -191,66 +189,6 @@ typedef enum
 } spi_software_cs_level_type;
 
 /**
-  * @brief i2s audio protocol type
-  */
-typedef enum
-{
-  I2S_AUDIO_PROTOCOL_PHILLIPS            = 0x00, /*!< i2s philip standard */
-  I2S_AUDIO_PROTOCOL_MSB                 = 0x01, /*!< msb-justified standard */
-  I2S_AUDIO_PROTOCOL_LSB                 = 0x02, /*!< lsb-justified standard */
-  I2S_AUDIO_PROTOCOL_PCM_SHORT           = 0x03, /*!< pcm standard-short frame */
-  I2S_AUDIO_PROTOCOL_PCM_LONG            = 0x04  /*!< pcm standard-long frame */
-} i2s_audio_protocol_type;
-
-/**
-  * @brief i2s audio frequency type
-  */
-typedef enum
-{
-  I2S_AUDIO_FREQUENCY_DEFAULT            = 2,     /*!< i2s audio sampling frequency default */
-  I2S_AUDIO_FREQUENCY_8K                 = 8000,  /*!< i2s audio sampling frequency 8k */
-  I2S_AUDIO_FREQUENCY_11_025K            = 11025, /*!< i2s audio sampling frequency 11.025k */
-  I2S_AUDIO_FREQUENCY_16K                = 16000, /*!< i2s audio sampling frequency 16k */
-  I2S_AUDIO_FREQUENCY_22_05K             = 22050, /*!< i2s audio sampling frequency 22.05k */
-  I2S_AUDIO_FREQUENCY_32K                = 32000, /*!< i2s audio sampling frequency 32k */
-  I2S_AUDIO_FREQUENCY_44_1K              = 44100, /*!< i2s audio sampling frequency 44.1k */
-  I2S_AUDIO_FREQUENCY_48K                = 48000, /*!< i2s audio sampling frequency 48k */
-  I2S_AUDIO_FREQUENCY_96K                = 96000, /*!< i2s audio sampling frequency 96k */
-  I2S_AUDIO_FREQUENCY_192K               = 192000 /*!< i2s audio sampling frequency 192k */
-} i2s_audio_sampling_freq_type;
-
-/**
-  * @brief i2s data bit num and channel bit num type
-  */
-typedef enum
-{
-  I2S_DATA_16BIT_CHANNEL_16BIT           = 0x01, /*!< 16-bit data packed in 16-bit channel frame */
-  I2S_DATA_16BIT_CHANNEL_32BIT           = 0x02, /*!< 16-bit data packed in 32-bit channel frame */
-  I2S_DATA_24BIT_CHANNEL_32BIT           = 0x03, /*!< 24-bit data packed in 32-bit channel frame */
-  I2S_DATA_32BIT_CHANNEL_32BIT           = 0x04  /*!< 32-bit data packed in 32-bit channel frame */
-} i2s_data_channel_format_type;
-
-/**
-  * @brief i2s operation mode type
-  */
-typedef enum
-{
-  I2S_MODE_SLAVE_TX                      = 0x00, /*!< slave transmission mode */
-  I2S_MODE_SLAVE_RX                      = 0x01, /*!< slave reception mode */
-  I2S_MODE_MASTER_TX                     = 0x02, /*!< master transmission mode */
-  I2S_MODE_MASTER_RX                     = 0x03  /*!< master reception mode */
-} i2s_operation_mode_type;
-
-/**
-  * @brief i2s clock polarity type
-  */
-typedef enum
-{
-  I2S_CLOCK_POLARITY_LOW                 = 0x00, /*!< i2s clock steady state is low level */
-  I2S_CLOCK_POLARITY_HIGH                = 0x01  /*!< i2s clock steady state is high level */
-} i2s_clock_polarity_type;
-
-/**
   * @brief spi init type
   */
 typedef struct
@@ -265,18 +203,6 @@ typedef struct
   spi_cs_mode_type                       cs_mode_selection;     /*!< hardware or software cs mode selection */
 } spi_init_type;
 
-/**
-  * @brief i2s init type
-  */
-typedef struct
-{
-  i2s_operation_mode_type                operation_mode;        /*!< operation mode selection */
-  i2s_audio_protocol_type                audio_protocol;        /*!< audio protocol selection */
-  i2s_audio_sampling_freq_type           audio_sampling_freq;   /*!< audio frequency selection */
-  i2s_data_channel_format_type           data_channel_format;   /*!< data bit num and channel bit num selection */
-  i2s_clock_polarity_type                clock_polarity;        /*!< clock polarity selection */
-  confirm_state                          mclk_output_enable;    /*!< mclk_output selection */
-} i2s_init_type;
 
 /**
   * @brief type define spi register all
@@ -410,33 +336,10 @@ typedef struct
     __IO uint32_t i2sctrl;
     struct
     {
-      __IO uint32_t i2scbn              : 1; /* [0] */
-      __IO uint32_t i2sdbn              : 2; /* [2:1] */
-      __IO uint32_t i2sclkpol           : 1; /* [3] */
-      __IO uint32_t stdsel              : 2; /* [5:4] */
-      __IO uint32_t reserved1           : 1; /* [6] */
-      __IO uint32_t pcmfssel            : 1; /* [7] */
-      __IO uint32_t opersel             : 2; /* [9:8] */
-      __IO uint32_t i2sen               : 1; /* [10] */
+      __IO uint32_t reserved1           : 11;/* [0:10] */
       __IO uint32_t i2smsel             : 1; /* [11] */
       __IO uint32_t reserved2           : 20;/* [31:12] */
     } i2sctrl_bit;
-  };
-
-  /**
-    * @brief spi i2sclk register, offset:0x20
-    */
-  union
-  {
-    __IO uint32_t i2sclk;
-    struct
-    {
-      __IO uint32_t i2sdiv_l            : 8; /* [7:0] */
-      __IO uint32_t i2sodd              : 1; /* [8] */
-      __IO uint32_t i2smclkoe           : 1; /* [9] */
-      __IO uint32_t i2sdiv_h            : 2; /* [11:10] */
-      __IO uint32_t reserved1           : 20;/* [31:12] */
-    } i2sclk_bit;
   };
 
 } spi_type;
@@ -464,9 +367,6 @@ void spi_software_cs_internal_level_set(spi_type* spi_x, spi_software_cs_level_t
 void spi_frame_bit_num_set(spi_type* spi_x, spi_frame_bit_num_type bit_num);
 void spi_half_duplex_direction_set(spi_type* spi_x, spi_half_duplex_direction_type direction);
 void spi_enable(spi_type* spi_x, confirm_state new_state);
-void i2s_default_para_init(i2s_init_type* i2s_init_struct);
-void i2s_init(spi_type* spi_x, i2s_init_type* i2s_init_struct);
-void i2s_enable(spi_type* spi_x, confirm_state new_state);
 void spi_i2s_interrupt_enable(spi_type* spi_x, uint32_t spi_i2s_int, confirm_state new_state);
 void spi_i2s_dma_transmitter_enable(spi_type* spi_x, confirm_state new_state);
 void spi_i2s_dma_receiver_enable(spi_type* spi_x, confirm_state new_state);
