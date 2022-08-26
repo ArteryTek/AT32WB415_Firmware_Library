@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     usbh_msc_class.h
-  * @version  v2.0.2
-  * @date     2022-06-28
+  * @version  v2.0.3
+  * @date     2022-08-16
   * @brief    usb host msc class header file
   **************************************************************************
   *                       Copyright notice & Disclaimer

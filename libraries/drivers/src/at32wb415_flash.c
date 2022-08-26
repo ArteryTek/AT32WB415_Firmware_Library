@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32wb415_flash.c
-  * @version  v2.0.2
-  * @date     2022-06-28
+  * @version  v2.0.3
+  * @date     2022-08-16
   * @brief    contains all the functions for the flash firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
