@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     system_at32wb415.c
-  * @version  v2.0.3
-  * @date     2022-08-16
   * @brief    contains all the functions for cmsis cortex-m4 system source file
   **************************************************************************
   *                       Copyright notice & Disclaimer

@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     at32wb415_crm.c
-  * @version  v2.0.3
-  * @date     2022-08-16
   * @brief    contains all the functions for the crm firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -411,6 +409,7 @@ void crm_ahb_div_set(crm_ahb_div_type value)
 
 /**
   * @brief  set crm apb1 division
+  * @note   the maximum frequency of APB1/APB2 clock is 75 MHz
   * @param  value
   *         this parameter can be one of the following values:
   *         - CRM_APB1_DIV_1
@@ -427,6 +426,7 @@ void crm_apb1_div_set(crm_apb1_div_type value)
 
 /**
   * @brief  set crm apb2 division
+  * @note   the maximum frequency of APB1/APB2 clock is 75 MHz
   * @param  value
   *         this parameter can be one of the following values:
   *         - CRM_APB2_DIV_1
@@ -518,6 +518,7 @@ void crm_pll_config(crm_pll_clock_source_type clock_source, crm_pll_mult_type mu
   {
     CRM->cfg_bit.pllrcs = FALSE;
     pllrcfreq = (HICK_VALUE / 2);
+    CRM->misc1_bit.hickdiv = CRM_HICK48_NODIV;
   }
   else
   {
@@ -607,6 +608,7 @@ void crm_pll_config2(crm_pll_clock_source_type clock_source, uint16_t pll_ns, \
   if(clock_source == CRM_PLL_SOURCE_HICK)
   {
     CRM->cfg_bit.pllrcs = FALSE;
+    CRM->misc1_bit.hickdiv = CRM_HICK48_NODIV;
   }
   else
   {

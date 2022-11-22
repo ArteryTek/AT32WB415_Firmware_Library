@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.3
-  * @date     2022-08-16
   * @brief    readme
   **************************************************************************
   */
@@ -18,4 +16,4 @@
   - sc usart cmdvcc  --->   pb14
   - sc usart off     --->   pb15
 
-  for more detailed information. please refer to the application note document AN0099.
+  for more detailed information. please refer to the application note document AN0099.

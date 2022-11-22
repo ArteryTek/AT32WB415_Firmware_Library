@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.3
-  * @date     2022-08-16
   * @brief    readme
   **************************************************************************
   */
@@ -12,4 +10,4 @@
   tmr9_ch1 toggling with frequency = 366.2 hz
   tmr9_ch2 toggling with frequency = 732.4 hz  
 
-  for more detailed information. please refer to the application note document AN0085.
+  for more detailed information. please refer to the application note document AN0085.
