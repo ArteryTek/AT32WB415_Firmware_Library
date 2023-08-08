@@ -1,6 +1,0 @@
-./app_led3_toggle/mdk_v5/app_led3_toggle.uvprojx
-0 Error(s), 0 Warning(s).
-./app_led4_toggle/mdk_v5/app_led4_toggle.uvprojx
-0 Error(s), 0 Warning(s).
-./bootloader/mdk_v5/bootloader.uvprojx
-0 Error(s), 0 Warning(s).

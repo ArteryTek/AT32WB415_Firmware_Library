@@ -15,4 +15,4 @@
     pb13(sck)   <-->   pb13(sck)
     pb15(mosi)  <-->   pb15(mosi)
 
-  for more detailed information. please refer to the application note document AN0102.
+  for more detailed information. please refer to the application note document AN0102.

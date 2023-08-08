@@ -35,11 +35,11 @@ extern "C" {
 #include "at32wb415_board.h"
 #include "stdio.h"
 
-/** @addtogroup AT32WB415_periph_examples
+/** @addtogroup UTILITIES_examples
   * @{
   */
 
-/** @addtogroup 415_USB_device_hid_app_led4
+/** @addtogroup USB_iap_app_led4_toggle
   * @{
   */
 

@@ -60,6 +60,22 @@ extern "C" {
     #define AT32WB415xx
 #endif
 
+/**
+  * define with package
+  */
+#if defined (AT32WB415CCU7_7)
+
+    #define AT32WB415Cx
+#endif
+
+/**
+  * define with memory density
+  */
+#if defined (AT32WB415CCU7_7)
+
+    #define AT32WB415xC
+#endif
+
 #ifndef USE_STDPERIPH_DRIVER
 /**
   * @brief comment the line below if you will not use the peripherals drivers.
@@ -79,7 +95,7 @@ extern "C" {
   */
 #define __AT32WB415_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
 #define __AT32WB415_LIBRARY_VERSION_MIDDLE   (0x00) /*!< [23:16] middle version */
-#define __AT32WB415_LIBRARY_VERSION_MINOR    (0x05) /*!< [15:8]  minor version */
+#define __AT32WB415_LIBRARY_VERSION_MINOR    (0x06) /*!< [15:8]  minor version */
 #define __AT32WB415_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
 #define __AT32WB415_LIBRARY_VERSION          ((__AT32WB415_LIBRARY_VERSION_MAJOR << 24)  | \
                                               (__AT32WB415_LIBRARY_VERSION_MIDDLE << 16) | \

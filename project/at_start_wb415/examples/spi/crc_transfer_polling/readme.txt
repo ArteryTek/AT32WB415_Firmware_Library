@@ -16,4 +16,4 @@
     pb14(miso)     <-->   pb14(miso)
     pb15(mosi)     <-->   pb15(mosi)
 
-  for more detailed information. please refer to the application note document AN0102.
+  for more detailed information. please refer to the application note document AN0102.

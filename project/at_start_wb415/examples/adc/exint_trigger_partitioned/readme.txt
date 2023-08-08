@@ -15,4 +15,4 @@
   trigger source:
   - ordinary   -->  exint line11(pa11)
   - preempt    -->  exint line15(pb15)
-  please note that, you need weld resistance r14 when use pin header pa11*.
+  please note that, you need weld resistance r14 when use pin header pa11*.
