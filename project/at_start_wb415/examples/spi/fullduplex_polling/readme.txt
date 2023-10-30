@@ -6,8 +6,8 @@
   */
 
   this demo is based on the at-start board, in this demo, shows how to use
-  fullduplex mode transfer data by polling mode.because of at32wb415 have 
-  only one spi,so this demo will show two at_start board communite.and 
+  fullduplex mode transfer data by polling mode.because of there is only one spi,
+  so this demo will show two at_start board communite.and 
   the pa5 pin used to synchronize the master and slave.
   the pins connect as follow:
   - board1(MASTER)        board2(SLAVE)

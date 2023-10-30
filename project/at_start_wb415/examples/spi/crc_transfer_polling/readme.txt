@@ -6,7 +6,7 @@
   */
 
   this demo is based on the at-start board, in this demo, shows how to transfer
-  crc value by polling mode.because of at32wb415 have only one spi,so this demo 
+  crc value by polling mode.because of there is only one spi,so this demo 
   will show two at_start board communite.and the pa5 pin used to synchronize 
   the master and slave.
   the pins connect as follow:
