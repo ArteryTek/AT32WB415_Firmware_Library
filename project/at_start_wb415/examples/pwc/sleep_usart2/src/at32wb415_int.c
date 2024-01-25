@@ -141,7 +141,7 @@ void SysTick_Handler(void)
   */
 void USART2_IRQHandler(void)
 {
-  if(usart_flag_get(USART2, USART_RDBF_FLAG) != RESET)
+  if(usart_interrupt_flag_get(USART2, USART_RDBF_FLAG) != RESET)
   {
     /* clear rdbf flag */
     usart2_index = usart_data_receive(USART2);

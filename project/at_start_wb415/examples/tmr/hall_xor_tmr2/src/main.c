@@ -137,7 +137,7 @@ int main(void)
   */
 void TMR4_GLOBAL_IRQHandler(void)
 {
-  if(tmr_flag_get(TMR4, TMR_TRIGGER_FLAG) != RESET)
+  if(tmr_interrupt_flag_get(TMR4, TMR_TRIGGER_FLAG) != RESET)
   {
     GPIOA->odt ^= GPIO_PINS_8;
     tmr_flag_clear(TMR4, TMR_TRIGGER_FLAG);

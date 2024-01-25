@@ -86,7 +86,7 @@ void USART2_IRQHandler(void)
 {
   uint16_t reval;
   time_ira_cnt = 0;  /* clear upgrade time out flag */
-  if(usart_flag_get(USART2, USART_RDBF_FLAG) != RESET)
+  if(usart_interrupt_flag_get(USART2, USART_RDBF_FLAG) != RESET)
   {
     reval = usart_data_receive(USART2);
     if(usart_group_struct.count > (USART_REC_LEN - 1))

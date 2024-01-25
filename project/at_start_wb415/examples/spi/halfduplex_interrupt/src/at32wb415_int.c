@@ -37,8 +37,6 @@ extern __IO uint32_t tx_index, rx_index;
   * @{
   */
 
-//#define BUFFERSIZE 32
-
 /**
   * @brief  this function handles nmi exception.
   * @param  none
@@ -144,23 +142,17 @@ void SysTick_Handler(void)
   */
  void SPI2_IRQHandler(void)
 {
-  if(SPI2->ctrl2_bit.tdbeie != RESET)
+  if(spi_i2s_interrupt_flag_get(SPI2, SPI_I2S_TDBE_FLAG) != RESET)
   {
-    if(spi_i2s_flag_get(SPI2, SPI_I2S_TDBE_FLAG) != RESET)
-    {
-      spi_i2s_data_transmit(SPI2, spi2_tx_buffer[tx_index++]);
-    }
-    if(tx_index == 32)
-    {
-      spi_i2s_interrupt_enable(SPI2, SPI_I2S_TDBE_INT, FALSE);
-    }
+    spi_i2s_data_transmit(SPI2, spi2_tx_buffer[tx_index++]);
   }
-  if(SPI2->ctrl2_bit.rdbfie != RESET)
+  if(tx_index == 32)
   {
-    if((spi_i2s_flag_get(SPI2, SPI_I2S_RDBF_FLAG) ) != RESET)
-    {
-      spi2_rx_buffer[rx_index++] = spi_i2s_data_receive(SPI2);
-    }
+    spi_i2s_interrupt_enable(SPI2, SPI_I2S_TDBE_INT, FALSE);
+  }
+  if((spi_i2s_interrupt_flag_get(SPI2, SPI_I2S_RDBF_FLAG) ) != RESET)
+  {
+    spi2_rx_buffer[rx_index++] = spi_i2s_data_receive(SPI2);
   }
 }
 
