@@ -51,15 +51,15 @@ void system_clock_config(void)
   /* config flash psr register */
   flash_psr_set(FLASH_WAIT_CYCLE_4);
 
-  crm_clock_source_enable(CRM_CLOCK_SOURCE_HEXT, TRUE);
+  crm_clock_source_enable(CRM_CLOCK_SOURCE_HICK, TRUE);
 
   /* wait till hext is ready */
-  while(crm_hext_stable_wait() == ERROR)
+  while(crm_flag_get(CRM_HICK_STABLE_FLAG) != SET)
   {
   }
 
   /* config pll clock resource */
-  crm_pll_config(CRM_PLL_SOURCE_HEXT, CRM_PLL_MULT_18);
+  crm_pll_config(CRM_PLL_SOURCE_HICK, CRM_PLL_MULT_36);
 
   /* enable pll */
   crm_clock_source_enable(CRM_CLOCK_SOURCE_PLL, TRUE);

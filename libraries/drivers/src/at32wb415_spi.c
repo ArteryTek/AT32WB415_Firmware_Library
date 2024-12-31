@@ -83,7 +83,6 @@ void spi_default_para_init(spi_init_type* spi_init_struct)
   */
 void spi_init(spi_type* spi_x, spi_init_type* spi_init_struct)
 {
-  spi_x->i2sctrl_bit.i2smsel = FALSE;
   if(spi_init_struct->transmission_mode == SPI_TRANSMIT_FULL_DUPLEX)
   {
     spi_x->ctrl1_bit.slben = FALSE;
@@ -462,7 +461,6 @@ flag_status spi_i2s_interrupt_flag_get(spi_type* spi_x, uint32_t spi_i2s_flag)
   *         - SPI_I2S_ROERR_FLAG
   * @note
   *         SPI_I2S_TDBE_FLAG  this flag is cleared when the tx buffer already contain data to be transmit.
-  *         I2S_ACS_FLAG       this flag cann't cleared by software,the flag indicate the channel side(not use in pcm standard mode).
   *         SPI_I2S_BF_FLAG    this flag cann't cleared by software, it's set and cleared by hardware.
   * @retval none
   */

@@ -264,13 +264,12 @@ typedef struct
     {
       __IO uint32_t rdbf                 : 1; /* [0] */
       __IO uint32_t tdbe                 : 1; /* [1] */
-      __IO uint32_t acs                  : 1; /* [2] */
-      __IO uint32_t tuerr                : 1; /* [3] */
+      __IO uint32_t reserved1            : 2; /* [3:2] */
       __IO uint32_t ccerr                : 1; /* [4] */
       __IO uint32_t mmerr                : 1; /* [5] */
       __IO uint32_t roerr                : 1; /* [6] */
       __IO uint32_t bf                   : 1; /* [7] */
-      __IO uint32_t reserved1            : 24;/* [31:8] */
+      __IO uint32_t reserved2            : 24;/* [31:8] */
     } sts_bit;
   };
 
@@ -325,21 +324,6 @@ typedef struct
       __IO uint32_t reserved1           : 16;/* [31:16] */
     } tcrc_bit;
   };
-
-  /**
-    * @brief spi i2sctrl register, offset:0x1C
-    */
-  union
-  {
-    __IO uint32_t i2sctrl;
-    struct
-    {
-      __IO uint32_t reserved1           : 11;/* [0:10] */
-      __IO uint32_t i2smsel             : 1; /* [11] */
-      __IO uint32_t reserved2           : 20;/* [31:12] */
-    } i2sctrl_bit;
-  };
-
 } spi_type;
 
 /**
